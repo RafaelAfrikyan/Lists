@@ -3,10 +3,19 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import { rootReducer } from "./store/reducers/rootReducer";
+import { localStorageMiddleware } from "./store/middlwares/localStorageMiddlware";
 
-const store = createStore(rootReducer);
+const persistedState = localStorage.getItem("reduxState")
+  ? JSON.parse(localStorage.getItem("reduxState"))
+  : {};
+
+const store = createStore(
+  rootReducer,
+  persistedState,
+  applyMiddleware(localStorageMiddleware)
+);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>

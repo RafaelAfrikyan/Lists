@@ -1,23 +1,41 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 import { useDispatch } from "react-redux";
-import { editListTitle } from "../store/reducers/listReducer/actionCreators";
+import {
+  addChildItem,
+  deleteList,
+  editListTitle,
+} from "../store/reducers/listReducer/actionCreators";
+
 const HierarchicalItem = ({ item, items }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
+  const [newItemTitle, setNewItemTitle] = useState("");
   const [isEditTitleOpened, setIsEditTitleOpened] = useState(false);
+  const [addItemSelected, isAddItemSelected] = useState(false);
+
   const dispatch = useDispatch();
+
   const handleItemClick = () => {
-    setIsExpanded(!isExpanded);
+    setIsOpened(!isOpened);
   };
+
   const changeItemTitle = (event) => {
-    console.log(event.target.value);
     dispatch(editListTitle(item.id, event.target.value));
+  };
+
+  const addItemClick = () => {
+    if (!addItemSelected) {
+      isAddItemSelected(true);
+    } else {
+      dispatch(addChildItem(Date.now(), item.id, newItemTitle));
+      isAddItemSelected(false);
+    }
   };
   return (
     <div>
       <div className={styles.item_wrapper}>
         <button onClick={handleItemClick}>
-          {isExpanded ? "Hide Child" : "Show Child"}
+          {isOpened ? "Hide Child" : "Show Child"}
         </button>
         <p>{item.id}</p>
         {!isEditTitleOpened ? (
@@ -34,8 +52,26 @@ const HierarchicalItem = ({ item, items }) => {
             Save
           </button>
         )}
+        <button
+          onClick={() => {
+            dispatch(deleteList(item.id));
+          }}
+        >
+          Delete
+        </button>
+
+        <button onClick={addItemClick}>
+          {addItemSelected ? "Save" : "Add item"}
+        </button>
+
+        {addItemSelected && (
+          <input
+            onChange={(event) => setNewItemTitle(event.target.value)}
+            placeholder="Add item"
+          />
+        )}
       </div>
-      {isExpanded && item.children && item.children.length > 0 && (
+      {isOpened && item.children && item.children.length > 0 && (
         <div className={styles.child_items}>
           {item.children.map((child) => (
             <HierarchicalItem key={child.id} item={child} items={items} />
