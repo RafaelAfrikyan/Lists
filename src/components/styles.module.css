@@ -1,0 +1,13 @@
+.item_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: aliceblue;
+  width: 700px;
+  border: 1px solid black;
+  /* flex-direction: column; */
+}
+.child_items {
+  background-color: aqua;
+}
