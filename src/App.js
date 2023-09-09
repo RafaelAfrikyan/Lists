@@ -7,15 +7,16 @@ import { addItem } from "./store/reducers/listReducer/actionCreators";
 
 function App() {
   const lists = useSelector(selectLists);
-
   const [newListName, setNewListName] = useState("");
   const dispatch = useDispatch();
+
   const addNewList = () => {
     if (newListName.trim()) {
       dispatch(addItem(newListName));
       setNewListName("");
     }
   };
+
   return (
     <div className="wrapper">
       <div>

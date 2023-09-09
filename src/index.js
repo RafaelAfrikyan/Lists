@@ -5,7 +5,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
 import { rootReducer } from "./store/reducers/rootReducer";
-import { localStorageMiddleware } from "./store/middlwares/localStorageMiddlware";
+import { localStorageMiddleware } from "./store/middlewares/localStorageMiddleware";
 
 const persistedState = localStorage.getItem("reduxState")
   ? JSON.parse(localStorage.getItem("reduxState"))
