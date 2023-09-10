@@ -33,49 +33,50 @@ export const Card = ({
         <h3 className={styles.item_name}>{item.name}</h3>
       ) : (
         <input
-          className={styles.input}
+          className={styles.input_title}
           value={item.name}
           onChange={changeItemTitle}
         />
       )}
-      {!isEditTitleOpened ? (
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        {!isEditTitleOpened ? (
+          <img
+            className={styles.button}
+            onClick={() => setIsEditTitleOpened(!isEditTitleOpened)}
+            src={EditIcon}
+            alt="sorry"
+          />
+        ) : (
+          <img
+            src={ApplyIcon}
+            className={styles.button}
+            onClick={() => setIsEditTitleOpened(!isEditTitleOpened)}
+          />
+        )}
+
         <img
           className={styles.button}
-          onClick={() => setIsEditTitleOpened(!isEditTitleOpened)}
-          src={EditIcon}
+          onClick={() => {
+            dispatch(deleteItem(item.id));
+          }}
+          src={DeleteIcon}
           alt="sorry"
         />
-      ) : (
+        {addItemSelected && (
+          <input
+            className={styles.input}
+            onChange={(event) => setNewItemTitle(event.target.value)}
+            placeholder="Add item"
+          />
+        )}
+
         <img
-          src={ApplyIcon}
           className={styles.button}
-          onClick={() => setIsEditTitleOpened(!isEditTitleOpened)}
+          onClick={addItemClick}
+          src={addItemSelected ? ApplyIcon : AddIcon}
+          alt="sorry"
         />
-      )}
-
-      <img
-        className={styles.button}
-        onClick={() => {
-          dispatch(deleteItem(item.id));
-        }}
-        src={DeleteIcon}
-        alt="sorry"
-      />
-
-      <img
-        className={styles.button}
-        onClick={addItemClick}
-        src={addItemSelected ? ApplyIcon : AddIcon}
-        alt="sorry"
-      />
-
-      {addItemSelected && (
-        <input
-          className={styles.input}
-          onChange={(event) => setNewItemTitle(event.target.value)}
-          placeholder="Add item"
-        />
-      )}
+      </div>
     </div>
   );
 };

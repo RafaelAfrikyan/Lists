@@ -2,28 +2,31 @@
   display: flex;
   align-items: center;
   padding: 10px;
-  justify-content: space-around;
+  padding-left: 10px;
+  justify-content: space-between;
   gap: 12px;
   max-height: 200px;
   background-color: aliceblue;
   width: 700px;
   border: 1px solid black;
-  height: auto;
   flex-wrap: wrap;
 }
 .item_name {
-  width: 80px;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 .child_items {
-  margin-left: 26px;
+  margin-left: 6px;
 }
-.input {
+.input,
+.input_title {
   border: 1px solid lightblue;
   height: 24px;
   border-radius: 12px;
   width: 100px;
+}
+.input_title {
+  width: unset;
 }
 
 .item_creator_wrapper {
