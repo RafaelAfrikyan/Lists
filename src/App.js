@@ -4,10 +4,11 @@ import { selectLists } from "./store/reducers/listReducer/selectors";
 import HierarchicalItem from "./components/HierarchicalItem";
 import { useState } from "react";
 import { addItem } from "./store/reducers/listReducer/actionCreators";
+import { NewItemCreator } from "./components/NewItemCreator";
 
 function App() {
-  const lists = useSelector(selectLists);
   const [newListName, setNewListName] = useState("");
+  const lists = useSelector(selectLists);
   const dispatch = useDispatch();
 
   const addNewList = () => {
@@ -19,13 +20,11 @@ function App() {
 
   return (
     <div className="wrapper">
-      <div>
-        <input
-          value={newListName}
-          onChange={(event) => setNewListName(event.target.value)}
-        />
-        <button onClick={addNewList}>Add new list</button>
-      </div>
+      <NewItemCreator
+        newListName={newListName}
+        setNewListName={setNewListName}
+        addNewList={addNewList}
+      />
       {lists
         .filter((item) => item.parent_id === null)
         .map((item) => (

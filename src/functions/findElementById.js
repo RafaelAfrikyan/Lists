@@ -11,6 +11,5 @@ export const findElementById = (item, id) => {
       }
     });
   }
-
   return foundedItem;
 };

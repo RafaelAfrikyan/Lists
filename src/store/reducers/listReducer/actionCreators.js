@@ -1,28 +1,28 @@
 import {
   ADD_CHILD_ITEM,
   ADD_ITEM,
-  DELETE_LIST,
-  EDIT_LIST_NAME,
-  SET_LIST_ITEM,
+  DELETE_ITEM,
+  EDIT_ITEM_NAME,
+  SET_ITEM,
 } from "./actionTypes";
 
-export const setListItem = (data) => ({
-  type: SET_LIST_ITEM,
+export const setItem = (data) => ({
+  type: SET_ITEM,
   payload: {
     data,
   },
 });
 
-export const editListTitle = (id, title) => ({
-  type: EDIT_LIST_NAME,
+export const editItemTitle = (id, title) => ({
+  type: EDIT_ITEM_NAME,
   payload: {
     id,
     title,
   },
 });
 
-export const deleteList = (id) => ({
-  type: DELETE_LIST,
+export const deleteItem = (id) => ({
+  type: DELETE_ITEM,
   payload: {
     id,
   },
